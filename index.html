@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peioner Bank Account</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="login-area">
+    <h1>Welcome to Peioner Account</h1>
+    <div class="login-box">
+        <h3>Login</h3>
+        <input type="text" class="form-control" placeholder="Enter your email">
+        <br>
+        <input type="password" class="form-control" placeholder="Enter your  password">
+        <br>
+        <button id="login-btn" class="btn btn-success">Enter</button>
+    </div>
+  </div>
+
+   <div id="transaction-area">
+       <div class="row">
+           <div class="col-md-4">
+              <div class="deposite balance-style">
+                <h5>Deposite</h5>
+                <h2>$ <span id="currentAmount">00</span></h2>
+              </div>
+           </div>
+           <div class="col-md-4">
+               <div class="withdraw balance-style">
+                <h5>Withdraw</h5>
+                <h2>$ <span id="currentWithdraw">00</span></h2>
+               </div>
+           </div>
+           <div class="col-md-4">
+               <div class="balance balance-style">
+                <h5>Balance</h5>
+                <h2>$<span id="currentBalance">1500</span></h2>
+               </div>
+           </div>
+       </div>
+       <div class="row">
+           <div class="col-md-6">
+                  <div class="count-amount">
+                      <h4>Deposite</h4>
+                      <input id="depositeamount" type="text" class="form-control" placeholder="$ Enter your amount">
+                      <br>
+                    <div id="adddeposite" class="btn btn-primary">Deposite</div>
+                </div>
+           </div>
+           <div class="col-md-6">
+                    <div class="count-amount">
+                       <h4>Withdraw</h4>
+                       <input id="addwithdraw" type="text" class="form-control" placeholder="$ Enter your amount">
+                       <br>
+                    <div id="withdrawbtn" class="btn btn-primary">Withdraw</div>
+                </div>
+           </div>
+       </div>
+   </div>
+
+
+  <script>
+    //   login button syestem
+      const loginBtn = document.getElementById('login-btn')
+      loginBtn.addEventListener('click',function(){
+      const loginArea = document.getElementById('login-area')
+      loginArea.style.display = "none";
+      const transactionArea = document.getElementById('transaction-area')
+      transactionArea.style.display = "block"; 
+      })
+
+    //   deposite amount count
+    const addDeposite = document.getElementById('adddeposite')
+    addDeposite.addEventListener('click',function(){
+    const depositeAmount = document.getElementById('depositeamount').value;
+    const depositNumber =parseFloat(depositeAmount)
+
+    updateSpantext ("currentAmount", depositNumber)
+    updateSpantext ("currentBalance", depositNumber)
+ 
+    document.getElementById('depositeamount').value = "";
+    
+    })
+    function updateSpantext (id,depositNumber){
+    const currentBalance = document.getElementById(id).innerText;
+    const currentBalanceNumber = parseFloat(currentBalance);
+    const totalBalance = depositNumber + currentBalanceNumber;
+    document.getElementById(id).innerText = totalBalance;
+    }
+   
+    // withdraw amount cpunt
+    
+    const withdrawBtn = document.getElementById('withdrawbtn')
+    withdrawBtn.addEventListener('click',function(){
+     const addWithdraw = document.getElementById('addwithdraw').value;
+     const withdrawNumber = parseFloat(addWithdraw);
+     
+     updateSpantext ("currentWithdraw", withdrawNumber)
+     updateSpantext ("currentBalance", -1* withdrawNumber)
+ 
+     document.getElementById('addwithdraw').value = "";
+    })
+
+  </script>
+ 
+</body>
+</html>
